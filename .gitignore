@@ -1,3 +1,8 @@
-node_modules/
+# Ignore constant.js file
+constant.js
 
+# Ignore config.env file
 config.env
+
+# Ignore node_modules folder
+node_modules/
