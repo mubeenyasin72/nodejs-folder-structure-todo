@@ -2,7 +2,7 @@
 constant.js
 
 # Ignore config.env file
-config.env
+.env
 
 # Ignore node_modules folder
 node_modules/

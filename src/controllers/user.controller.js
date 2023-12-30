@@ -7,11 +7,11 @@
 // import mongoose from "mongoose";
 
 //Register Controller
-const registerUser = async('/', (req, res) => {
+const registerUser = (req, res) => {
 
    res.send('hello from simple server :)')
 
-})
+}
 
 
 
