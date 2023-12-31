@@ -8,9 +8,9 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 
 //Register Controller
 const registerUser = (req, res) => {
-    const { username } = req.body;
+  const { username } = req.body;
   if (!username) {
-    return new ApiError(400, "username is required...");
+    throw new ApiError(400, "username is required...");
   }
   return res
     .status(200)
