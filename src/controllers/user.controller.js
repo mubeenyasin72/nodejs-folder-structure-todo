@@ -9,10 +9,13 @@ import mongoose from "mongoose";
 //Register Controller
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, username, password } = req.body;
- console.log(req.body)
-  if (
-    [fullName, email, username, password] ||
-    [!fullName, !email, !username, !password].some(
+  // if (
+  //   [fullName, email, username, password] ||
+  //   [!fullName, !email, !username, !password].some(
+  //     (field) => field?.trim() === ""
+  //   )
+    if (
+    [fullName, email, username, password].some(
       (field) => field?.trim() === ""
     )
   ) {
@@ -44,6 +47,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     username: username.toLowerCase(),
   });
+  console.log("console is running problem in the Cloudinary")
 
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
