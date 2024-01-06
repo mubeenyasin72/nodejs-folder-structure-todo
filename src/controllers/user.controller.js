@@ -6,6 +6,23 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 
+//Generate Access Token and Resh Token
+const generateAccessAndRefereshTokens = async (userId) => {
+  try {
+    const user = await User.findById(userId);
+    const accessToken = user.generateAccessToken();
+    const refreshToken = user.generateRefereshToken();
+    user.refreshToken = refreshToken;
+    await user.save({ validateBeforeSave: true });
+    return { accessToken, refreshToken };
+  } catch (error) {
+    throw new ApiError(
+      500,
+      "Something went wrong while creating Referesh Token and Access Token"
+    );
+  }
+};
+
 //Register Controller
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, username, password } = req.body;
@@ -14,10 +31,8 @@ const registerUser = asyncHandler(async (req, res) => {
   //   [!fullName, !email, !username, !password].some(
   //     (field) => field?.trim() === ""
   //   )
-    if (
-    [fullName, email, username, password].some(
-      (field) => field?.trim() === ""
-    )
+  if (
+    [fullName, email, username, password].some((field) => field?.trim() === "")
   ) {
     throw new ApiError(400, "All fields are required");
   }
@@ -47,7 +62,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
     username: username.toLowerCase(),
   });
-  console.log("console is running problem in the Cloudinary")
+  console.log("console is running problem in the Cloudinary");
 
   const createdUser = await User.findById(user._id).select(
     "-password -refreshToken"
