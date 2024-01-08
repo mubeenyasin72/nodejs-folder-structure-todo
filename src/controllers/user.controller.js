@@ -129,27 +129,34 @@ const loginUser = asyncHandler(async (req, res, next) => {
 });
 //Logout Controller
 const logOutUser = asyncHandler(async (req, res, next) => {
-  await User.findByIdAndUpdate(
-    req.user._id,
-    {
-      $set: {
-        refreshToken: undefined,
+  try {
+    console.log(req.user._id)
+    const user = await User.findByIdAndUpdate(
+      req.user._id,
+      {
+        $set: {
+          refreshToken: undefined,
+        },
       },
-    },
-    {
-      new: true,
-    }
-  );
-  const options = {
-    httpOnly: true,
-    secure: true,
-  };
+      {
+        new: true,
+      }
+    );
+    console.log(user)
+    const options = {
+      httpOnly: true,
+      secure: true,
+    };
 
-  return res
-    .status(200)
-    .clearCookie("accessToken", options)
-    .clearCookie("refreshToken", options)
-    .json(new ApiResponse(200, {}, "User logged Out"));
+    return res
+      .status(200)
+      .clearCookie("accessToken", options)
+      .clearCookie("refreshToken", options)
+      .json(new ApiResponse(200, {}, "User logged Out"));
+  } catch (error) {
+    console.error("Error updating refreshToken:", error);
+    return res.status(500).json(new ApiError(500, "Internal Server Error"));
+  }
 });
 
 export { registerUser, loginUser, logOutUser };
