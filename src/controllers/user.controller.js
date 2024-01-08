@@ -21,7 +21,8 @@ const generateAccessAndRefereshTokens = async (userId) => {
     console.log(error);
     throw new ApiError(
       500,
-      "Something went wrong while creating Referesh Token and Access Token"
+      error?.message ||
+        "Something went wrong while creating Referesh Token and Access Token"
     );
   }
 };

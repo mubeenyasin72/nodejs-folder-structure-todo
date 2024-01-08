@@ -66,7 +66,7 @@ userSchema.methods.generateAccessToken = function () {
 };
 
 //Generate Referesh Token
-userSchema.methods.generateRefereshToken = function () {
+userSchema.methods.generateRefreshToken = function () {
   return jwt.sign(
     {
       _id: this._id,
@@ -77,5 +77,4 @@ userSchema.methods.generateRefereshToken = function () {
     }
   );
 };
-
 export const User = mongoose.model("User", userSchema);
