@@ -18,7 +18,7 @@ const generateAccessAndRefereshTokens = async (userId) => {
 
     return { accessToken, refreshToken };
   } catch (error) {
-    console.log(error)
+    console.log(error);
     throw new ApiError(
       500,
       "Something went wrong while creating Referesh Token and Access Token"
@@ -128,7 +128,27 @@ const loginUser = asyncHandler(async (req, res, next) => {
 });
 //Logout Controller
 const logOutUser = asyncHandler(async (req, res, next) => {
-  
-})
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined,
+      },
+    },
+    {
+      new: true,
+    }
+  );
+      const options = {
+        httpOnly: true,
+        secure: true
+    }
+
+    return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(200, {}, "User logged Out"))
+});
 
 export { registerUser, loginUser, logOutUser };
