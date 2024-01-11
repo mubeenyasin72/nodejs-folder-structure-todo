@@ -159,4 +159,9 @@ const logOutUser = asyncHandler(async (req, res, next) => {
   }
 });
 
+//Refresh Token Access
+const refreshAccessToken = asyncHandler(async (req, res) => {
+
+})
+
 export { registerUser, loginUser, logOutUser };
