@@ -12,10 +12,8 @@ const todoTaskSchema = new Schema(
     },
     subTodoTask: [
       {
-        type: String,
-        required: true,
-        trim: true,
-        index: true,
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"SubTodoTask"
       },
     ],
   },
