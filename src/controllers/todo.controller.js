@@ -17,7 +17,9 @@ const createTodo = asyncHandler(async (req, res, next) => {
     .json(new ApiResponse(200, todoTask, "Task Created Successfully"));
     
 })
-
+const getAllTodoTask = asyncHandler(async(req, res, next) => {
+    
+})
 
 export {
     createTodo
