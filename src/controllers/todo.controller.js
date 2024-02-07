@@ -23,6 +23,11 @@ const getAllTodoTask = asyncHandler(async(req, res, next) => {
     
 })
 
+//Update Todo Controller
+const getAllTodoTask = asyncHandler(async(req, res, next) => {
+    
+})
+
 export {
     createTodo
 }
