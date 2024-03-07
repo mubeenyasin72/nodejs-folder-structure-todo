@@ -20,7 +20,8 @@ const createTodo = asyncHandler(async (req, res, next) => {
 })
 //Get All Todo Task
 const getAllTodoTask = asyncHandler(async(req, res, next) => {
-    
+    const todoTask = await TodoTask.find()
+    return res.status(201).json(new ApiResponse(200,todoTask,"Todo Task are loaded..."))
 })
 
 //Update Todo Controller
