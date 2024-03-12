@@ -32,7 +32,6 @@ const updateTodoController = asyncHandler(async(req, res, next) => {
 const getSingleTodoTask = asyncHandler(async (req, res, next) => {
     
 })
-//
 export {
     createTodo,
     getAllTodoTask,
