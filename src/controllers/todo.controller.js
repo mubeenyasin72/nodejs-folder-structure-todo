@@ -35,7 +35,6 @@ const getSingleTodoTask = asyncHandler(async (req, res, next) => {
 const deleteTodoTask = asyncHandler(async (req, res, next) => {
     
 })
-//Filter Controller
 export {
     createTodo,
     getAllTodoTask,
