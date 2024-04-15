@@ -40,4 +40,5 @@ export {
     getAllTodoTask,
     updateTodoController,
     getSingleTodoTask,
+    deleteTodoTask
 }
