@@ -52,55 +52,55 @@ export {
 /////////////////////////////////////////////////////////////////////////////
 // const https = require('https');
 
-// https.get('https://coderbyte.com/api/challenges/json/json-cleaning', (resp) => {
-//   let data = '';
+https.get('https://coderbyte.com/api/challenges/json/json-cleaning', (resp) => {
+  let data = '';
 
-//   resp.on('data', (chunk) => {
-//     data += chunk;
-//   });
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
 
-//   resp.on('end', () => {
-//     try {
-//       console.log("Raw Data: ", data);
-//       const jsonData = JSON.parse(data);
-//       const cleanedObject = cleanObject(jsonData);
-//       console.log(JSON.stringify(cleanedObject));
-//     } catch (error) {
-//       console.error("Error While Parsing: ", error);
-//     }
-//   });
+  resp.on('end', () => {
+    try {
+      console.log("Raw Data: ", data);
+      const jsonData = JSON.parse(data);
+      const cleanedObject = cleanObject(jsonData);
+      console.log(JSON.stringify(cleanedObject));
+    } catch (error) {
+      console.error("Error While Parsing: ", error);
+    }
+  });
 
-// }).on("error", (err) => {
-//   console.error("Error While Fetching Data: ", err);
-// });
+}).on("error", (err) => {
+  console.error("Error While Fetching Data: ", err);
+});
 
-// function cleanObject(obj) {
-//   const cleanedObj = {};
-//   let itemsRemoved = 0;
+function cleanObject(obj) {
+  const cleanedObj = {};
+  let itemsRemoved = 0;
 
-//   for (const [key, value] of Object.entries(obj)) {
-//     if (Array.isArray(value)) {
-//       const cleanedArray = value.filter(item =>
-//         item !== 'N/A' && item !== '-' && item !== ''
-//       );
-//       if (cleanedArray.length !== value.length) {
-//         itemsRemoved += value.length - cleanedArray.length;
-//       }
-//       cleanedObj[key] = cleanedArray;
-//     } else if (typeof value === 'object' && value !== null) {
-//       cleanedObj[key] = cleanObject(value);
-//     } else {
-//       if (value !== 'N/A' && value !== '-' && value !== '') {
-//         cleanedObj[key] = value;
-//       } else {
-//         itemsRemoved++;
-//       }
-//     }
-//   }
+  for (const [key, value] of Object.entries(obj)) {
+    if (Array.isArray(value)) {
+      const cleanedArray = value.filter(item =>
+        item !== 'N/A' && item !== '-' && item !== ''
+      );
+      if (cleanedArray.length !== value.length) {
+        itemsRemoved += value.length - cleanedArray.length;
+      }
+      cleanedObj[key] = cleanedArray;
+    } else if (typeof value === 'object' && value !== null) {
+      cleanedObj[key] = cleanObject(value);
+    } else {
+      if (value !== 'N/A' && value !== '-' && value !== '') {
+        cleanedObj[key] = value;
+      } else {
+        itemsRemoved++;
+      }
+    }
+  }
 
-//   if (itemsRemoved > 0) {
-//     cleanedObj['items_removed'] = itemsRemoved;
-//   }
+  if (itemsRemoved > 0) {
+    cleanedObj['items_removed'] = itemsRemoved;
+  }
 
-//   return cleanedObj;
-// }
+  return cleanedObj;
+}
