@@ -30,6 +30,8 @@ const updateTodoController = asyncHandler(async(req, res, next) => {
 })
 //Get Single Todo Task Controller
 const getSingleTodoTask = asyncHandler(async (req, res, next) => {
+    const sinlgeTodo = await findById(req.params.id)
+    return res.status(200).json(new ApiResponse(200,sinlgeTodo,"Your Single Todo  Task Is Loaded Sucessfully"))
 })
 //Delete Todo task
 const deleteTodoTask = asyncHandler(async (req, res, next) => {
