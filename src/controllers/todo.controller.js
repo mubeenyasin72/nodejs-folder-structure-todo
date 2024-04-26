@@ -35,13 +35,15 @@ const getSingleTodoTask = asyncHandler(async (req, res, next) => {
 })
 //Delete Todo task
 const deleteTodoTask = asyncHandler(async (req, res, next) => {
-    
+    const delTodo = await findByIdAndDelete(req.params.id)
+    return res.status(200).json(new ApiResponse(200,delTodo,"Task Deleted Successfully..."))
 })
 export {
     createTodo,
     getAllTodoTask,
     updateTodoController,
     getSingleTodoTask,
+    deleteTodoTask
 }
 
 
